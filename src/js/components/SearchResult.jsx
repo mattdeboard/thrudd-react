@@ -14,11 +14,7 @@ let SearchResult = React.createClass({
     StationTypeIcon: React.PropTypes.string.isRequired,
     StationAllegiance: React.PropTypes.string,
     SupplyAmount: React.PropTypes.number.isRequired,
-    Demand: React.PropTypes.oneOf([
-      "High",
-      "Med",
-      " "
-    ]),
+    Demand: React.PropTypes.string,
     DemandAmount: React.PropTypes.number.isRequired,
     LastUpdate: React.PropTypes.string.isRequired,
     LastUpdatedBy: React.PropTypes.string.isRequired,
@@ -29,7 +25,13 @@ let SearchResult = React.createClass({
   },
 
   render: function() {
-    const demand = this.props.Demand !== " " ? this.props.Demand : "Low";
+    // There's a variety of values that can be returned by this 'Demand'
+    // property, each of which represents "Low". So instead of listing them,
+    // be very clever and infer that anything that's not "High" or "Med" must be
+    // "Low".
+    const demand = (
+      ["High", "Med"].indexOf(this.props.Demand) != -1 ? this.props.Demand : "Low"
+    );
     return (
       <tr>
         <td>
