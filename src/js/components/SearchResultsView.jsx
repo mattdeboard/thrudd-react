@@ -1,8 +1,10 @@
 const React = require('react');
 const fs = require('fs');
+const Immutable = require('immutable');
 const SearchResultStore = require('../stores/SearchResultStore');
 const SearchResult = require('./SearchResult.jsx');
-const { addSearchResults } = require('../actions/ActionCreators');
+const { addSearchResult } = require('../actions/ActionCreators');
+const { SEARCH_RESULT_PAGE_SIZE } = require('../constants/AppConstants');
 
 let TableHeading = React.createClass({
   render: function() {
@@ -26,21 +28,31 @@ let TableHeading = React.createClass({
 let SearchResultsView = React.createClass({
   statics: {
     fetchResults: function() {
-      let results = window.JSON.parse(
-        fs.readFileSync(__dirname + '/../data/commodity_query_result.json', 'utf8')
+      let results = fs.readFile(
+        `${__dirname}/../data/commodity_query_result_big.json`,
+        'utf8',
+        function(err, data) {
+          let jsonData = JSON.parse(data).CommodityList;
+          addSearchResult(jsonData);
+        }
       );
-      addSearchResults(results.CommodityList);
     }
   },
 
   getInitialState: function() {
     return {
-      results: SearchResultStore.getAll()
+      results: SearchResultStore.getPage(),
+      currentPage: 0
     };
   },
 
   handleSearchResultChange: function(e) {
-    return this.setState({ results: SearchResultStore.getAll() });
+    let start = SEARCH_RESULT_PAGE_SIZE * this.state.currentPage;
+    let end = start + SEARCH_RESULT_PAGE_SIZE;
+    return this.setState({
+      results: SearchResultStore.getPage(start, end),
+      currentPage: this.state.currentPage + 1
+    });
   },
 
   componentDidMount: function() {

@@ -23,7 +23,11 @@ module.exports = {
   },
   browserify: {
     settings: {
-      transform: ['reactify', 'babelify', 'brfs']
+      transform: [
+        'reactify',
+        'babelify',
+        'brfs'
+      ]
     },
     src: src + '/js/index.jsx',
     dest: dest + '/js',

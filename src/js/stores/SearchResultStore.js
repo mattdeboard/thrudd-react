@@ -13,7 +13,7 @@ function replaceResults(results) {
 }
 
 function appendResult(result) {
-  data = data.concat(results);
+  data = data.concat(result);
 }
 
 // Facebook style store creation.
@@ -22,6 +22,14 @@ let SearchResultStore = assign({}, BaseStore, {
   // public methods used by Controller-View to operate on data
   getAll: function() {
     return data;
+  },
+
+  getPage: function(start = 0, end = Constants.SEARCH_RESULT_PAGE_SIZE) {
+    return data.slice(start, end);
+  },
+
+  getResultCount: function() {
+    return data.size;
   },
 
   // register store with dispatcher, allowing actions to flow through
