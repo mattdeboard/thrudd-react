@@ -31,7 +31,7 @@ let SearchResultsView = React.createClass({
   statics: {
     fetchResults: function() {
       let results = fs.readFile(
-        `${__dirname}/../data/commodity_query_result_big.json`,
+        `${__dirname}/../data/commodity_query_result.json`,
         'utf8',
         function(err, data) {
           let jsonData = JSON.parse(data).CommodityList;
