@@ -95,13 +95,13 @@ let SearchResultsView = React.createClass({
       return false;
     }
     return (
-      <div className="row col-md-6 col-md-offset-6">
-        <PageButton clickHandler={this.handlePageButtonClick} direction={1}/>
-        <p className="lead">
+      <nav className="navbar">
+        <PageButton clickHandler={this.handlePageButtonClick} direction={-1}/>
+        <p className="col-md-offset-3 col-md-2 lead">
           {`Page ${this.state.currentPage} of ${pages}`}
         </p>
-        <PageButton clickHandler={this.handlePageButtonClick} direction={-1}/>
-      </div>
+        <PageButton clickHandler={this.handlePageButtonClick} direction={1}/>
+      </nav>
     );
   },
 
@@ -109,13 +109,13 @@ let SearchResultsView = React.createClass({
     return (
       <div id="DataListing" className="container">
         <hr />
+        {this.renderPageButtons()}
         <table className="table table-striped" id="DataListTable">
           <TableHeading />
           <tbody>
             {this.renderResultRows()}
           </tbody>
         </table>
-        {this.renderPageButtons()}
       </div>
     );
   }

@@ -17,7 +17,12 @@ let PageButton = React.createClass({
     // job done.
     let classNames = classnames(
       "btn",
-      "btn-default"
+      "btn-default",
+      "col-md-2",
+      {
+        "pull-right": this.props.direction == 1,
+        "navbar-left": this.props.direction == -1
+      }
     );
     return (
       <button
