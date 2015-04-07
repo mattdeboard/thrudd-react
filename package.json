@@ -8,6 +8,7 @@
     "babelify": "^6.0.1",
     "brfs": "^1.4.0",
     "browserify": "^9.0.7",
+    "classnames": "^1.2.0",
     "gulp": "^3.8.7",
     "gulp-brfs": "^0.1.0",
     "gulp-connect": "^2.2.0",
