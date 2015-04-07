@@ -31,7 +31,7 @@ let SearchResultsView = React.createClass({
   statics: {
     fetchResults: function() {
       let results = fs.readFile(
-        `${__dirname}/../data/commodity_query_result.json`,
+        `${__dirname}/../data/commodity_query_result_big.json`,
         'utf8',
         function(err, data) {
           let jsonData = JSON.parse(data).CommodityList;
@@ -89,19 +89,23 @@ let SearchResultsView = React.createClass({
   },
 
   renderPageButtons: function() {
-    const clickHandler = this.handlePageButtonClick;
-    return [1, -1].map(function(i) {
-      return (
-        <PageButton
-          clickHandler={clickHandler}
-          direction={i} />
-      );
-    });
+    // Don't render any page controls if there's only one page.
+    const pages = SearchResultStore.getNumPages();
+    if (SearchResultStore.getNumPages() == 1) {
+      return false;
+    }
+    return (
+      <div className="row col-md-6 col-md-offset-6">
+        <PageButton clickHandler={this.handlePageButtonClick} direction={1}/>
+        <p className="lead">
+          {`Page ${this.state.currentPage} of ${pages}`}
+        </p>
+        <PageButton clickHandler={this.handlePageButtonClick} direction={-1}/>
+      </div>
+    );
   },
 
   render: function() {
-    const resultCount = SearchResultStore.getResultCount();
-    const pages = SearchResultStore.getNumPages();
     return (
       <div id="DataListing" className="container">
         <hr />
@@ -111,13 +115,7 @@ let SearchResultsView = React.createClass({
             {this.renderResultRows()}
           </tbody>
         </table>
-        <div className="row col-md-6 col-md-offset-6">
-          <PageButton clickHandler={this.handlePageButtonClick} direction={1}/>
-          <p className="lead">
-            {`Page ${this.state.currentPage} of ${pages}`}
-          </p>
-          <PageButton clickHandler={this.handlePageButtonClick} direction={-1}/>
-        </div>
+        {this.renderPageButtons()}
       </div>
     );
   }
