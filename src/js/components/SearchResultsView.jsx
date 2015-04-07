@@ -116,6 +116,7 @@ let SearchResultsView = React.createClass({
             {this.renderResultRows()}
           </tbody>
         </table>
+        {this.renderPageButtons()}
       </div>
     );
   }
