@@ -102,9 +102,8 @@ let SearchResultsView = React.createClass({
   render: function() {
     const resultCount = SearchResultStore.getResultCount();
     const pages = SearchResultStore.getNumPages();
-
     return (
-      <div id="DataListing">
+      <div id="DataListing" className="container">
         <hr />
         <table className="table table-striped" id="DataListTable">
           <TableHeading />
