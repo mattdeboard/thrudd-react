@@ -12,7 +12,7 @@ function replaceResults(results) {
   data = Immutable.List.of(results);
 }
 
-function addResults(results) {
+function appendResult(result) {
   data = data.concat(results);
 }
 
@@ -28,8 +28,8 @@ let SearchResultStore = assign({}, BaseStore, {
   dispatcherIndex: AppDispatcher.register(function(payload) {
     let action = payload.action;
     switch(action.type) {
-      case Constants.ActionTypes.ADD_SEARCH_RESULTS:
-        addResults(action.results);
+      case Constants.ActionTypes.ADD_SEARCH_RESULT:
+        appendResult(action.result);
         SearchResultStore.emitChange();
         break;
     }

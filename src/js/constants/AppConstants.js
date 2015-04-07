@@ -3,7 +3,7 @@ const keyMirror = require('react/lib/keyMirror');
 module.exports = {
 
   ActionTypes: keyMirror({
-    ADD_SEARCH_RESULTS: null
+    ADD_SEARCH_RESULT: null
   }),
 
   ActionSources: keyMirror({
@@ -11,6 +11,8 @@ module.exports = {
     VIEW_ACTION: null
   }),
 
-  ToolURL: "http://www.elitetradingtool.co.uk"
+  TOOL_URL: "http://www.elitetradingtool.co.uk",
+
+  SEARCH_RESULT_PAGE_SIZE: 50
 
 };

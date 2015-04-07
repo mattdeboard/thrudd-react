@@ -3,10 +3,10 @@ var Constants = require('../constants/AppConstants');
 
 module.exports = {
 
-  addSearchResults: function(results) {
+  addSearchResult: function(result) {
     AppDispatcher.handleViewAction({
-      type: Constants.ActionTypes.ADD_SEARCH_RESULTS,
-      results: results
+      type: Constants.ActionTypes.ADD_SEARCH_RESULT,
+      result: result,
     });
   },
 

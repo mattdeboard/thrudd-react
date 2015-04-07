@@ -1,5 +1,5 @@
 const React = require('react');
-const { ToolURL } = require('../constants/AppConstants');
+const { TOOL_URL } = require('../constants/AppConstants');
 
 let StationIcon = React.createClass({
   propTypes: {
@@ -22,7 +22,7 @@ let StationIcon = React.createClass({
     }
     return (
       <img
-        src={`${ToolURL}/Content/images/${filename}.png`}
+        src={`${TOOL_URL}/Content/images/${filename}.png`}
         title={title} />
     );
   },
