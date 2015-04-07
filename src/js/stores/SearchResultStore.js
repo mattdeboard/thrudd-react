@@ -32,6 +32,15 @@ let SearchResultStore = assign({}, BaseStore, {
     return data.size;
   },
 
+  getNumPages: function(pageSize = Constants.SEARCH_RESULT_PAGE_SIZE) {
+    const total = this.getResultCount();
+    let numPages = Math.floor(total / pageSize);
+    if (total % pageSize) {
+      numPages += 1
+    }
+    return numPages;
+  },
+
   // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: AppDispatcher.register(function(payload) {
     let action = payload.action;

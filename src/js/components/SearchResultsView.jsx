@@ -52,6 +52,8 @@ let SearchResultsView = React.createClass({
     let targetPage = this.state.currentPage + direction;
     if (targetPage < 0) {
       targetPage = 0;
+    } else if (targetPage > SearchResultStore.getNumPages()) {
+      targetPage = this.state.currentPage;
     }
     let start = SEARCH_RESULT_PAGE_SIZE * targetPage;
     let end = start + SEARCH_RESULT_PAGE_SIZE;
@@ -99,10 +101,8 @@ let SearchResultsView = React.createClass({
 
   render: function() {
     const resultCount = SearchResultStore.getResultCount();
-    let pages = Math.floor(resultCount / SEARCH_RESULT_PAGE_SIZE);
-    if (resultCount % SEARCH_RESULT_PAGE_SIZE) {
-      pages += 1;
-    }
+    const pages = SearchResultStore.getNumPages();
+
     return (
       <div id="DataListing">
         <hr />
